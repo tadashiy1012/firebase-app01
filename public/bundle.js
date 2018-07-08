@@ -28283,12 +28283,8 @@ __webpack_require__.r(__webpack_exports__);
 function checkAuth() {
   return new Promise((resolve, reject) => {
     firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().onAuthStateChanged((result) => {
-      if (result) {
-        resolve(result);
-      } else {
-        //resolve([false, result]);
-        reject(new Error('auth failed'));
-      }
+      console.log(result);
+      resolve(result);
     });
   });
 }
@@ -28351,17 +28347,24 @@ __webpack_require__.r(__webpack_exports__);
   firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.app();
   Object(_funcs__WEBPACK_IMPORTED_MODULE_6__["checkAuth"])().then((result) => {
     console.log(result);
-    return Object(_funcs__WEBPACK_IMPORTED_MODULE_6__["execLogin"])();
-  }).then((result) => {
-    console.log(result);
-    if (result[0]) {
+    if (result) {
       document.querySelector('#loginResult').textContent = 'login OK!';
     } else {
-      const provider = new firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth.GoogleAuthProvider();
-      firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().signInWithRedirect(provider);
+      Object(_funcs__WEBPACK_IMPORTED_MODULE_6__["execLogin"])().then((result) => {
+        console.log(result);
+        if (result[0]) {
+          document.querySelector('#loginResult').textContent = 'login OK!';
+        } else {
+          const provider = new firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth.GoogleAuthProvider();
+          firebase_app__WEBPACK_IMPORTED_MODULE_0___default.a.auth().signInWithRedirect(provider);
+        };
+      }).catch((err) => {
+        console.log(err);
+        document.querySelector('#loginResult').textContent = 'login failed!';
+      });
     }
   }).catch((err) => {
-    console.error(err);
+    console.log(err);
     document.querySelector('#loginResult').textContent = 'login failed!';
   });
 }

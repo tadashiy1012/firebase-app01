@@ -3,12 +3,8 @@ import firebase from 'firebase/app';
 function checkAuth() {
   return new Promise((resolve, reject) => {
     firebase.auth().onAuthStateChanged((result) => {
-      if (result) {
-        resolve(result);
-      } else {
-        //resolve([false, result]);
-        reject(new Error('auth failed'));
-      }
+      console.log(result);
+      resolve(result);
     });
   });
 }

@@ -13,17 +13,24 @@ import config from './config';
   firebase.app();
   checkAuth().then((result) => {
     console.log(result);
-    return execLogin();
-  }).then((result) => {
-    console.log(result);
-    if (result[0]) {
+    if (result) {
       document.querySelector('#loginResult').textContent = 'login OK!';
     } else {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      firebase.auth().signInWithRedirect(provider);
+      execLogin().then((result) => {
+        console.log(result);
+        if (result[0]) {
+          document.querySelector('#loginResult').textContent = 'login OK!';
+        } else {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithRedirect(provider);
+        };
+      }).catch((err) => {
+        console.log(err);
+        document.querySelector('#loginResult').textContent = 'login failed!';
+      });
     }
   }).catch((err) => {
-    console.error(err);
+    console.log(err);
     document.querySelector('#loginResult').textContent = 'login failed!';
   });
 }
