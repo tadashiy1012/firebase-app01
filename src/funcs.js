@@ -29,4 +29,21 @@ function execLogin() {
     });
   });
 }
-export { checkAuth, execLogin };
+
+function execLoginProcA() {
+  const session = firebase.auth.Auth.Persistence.SESSION;
+  return firebase.auth().setPersistence(session).then(() => {
+    return firebase.auth().getRedirectResult();
+  });
+}
+
+function execLoginProcB() {
+  const provider = new firebase.auth.GoogleAuthProvider();
+  return firebase.auth().signInWithRedirect(provider);
+}
+
+function execLogout() {
+  return firebase.auth().signOut();
+}
+
+export { checkAuth, execLogin, execLoginProcA, execLoginProcB, execLogout };

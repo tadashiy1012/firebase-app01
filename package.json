@@ -5,8 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.js",
-    "start": "http-server"
+    "start": "webpack-serve"
   },
   "repository": {
     "type": "git",
@@ -17,11 +16,16 @@
   "license": "ISC",
   "homepage": "https://bitbucket.org/yama3ki/firebase-app01#readme",
   "devDependencies": {
+    "vue-loader": "^15.2.4",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.15.1",
-    "webpack-cli": "^3.0.8"
+    "webpack-cli": "^3.0.8",
+    "webpack-serve": "^2.0.2"
   },
   "dependencies": {
     "firebase": "^5.2.0",
-    "firebaseui": "^3.1.1"
+    "firebaseui": "^3.1.1",
+    "vue": "^2.5.16",
+    "vuex": "^3.0.1"
   }
 }
