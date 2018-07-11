@@ -9,27 +9,6 @@ function checkAuth() {
   });
 }
 
-function execLogin() {
-  return new Promise((resolve, reject) => {
-    Promise.resolve().then(() => {
-      return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
-    }).then(() => {
-      return firebase.auth().getRedirectResult()
-    }).then((result) => {
-      if (result.credential) {
-        console.log(result.credential.accessToken);
-      }
-      if (result.user === null || result.user === void 0) {
-        resolve([false]);
-      } else {
-        resolve([true, result.user, result.credential.accessToken]);
-      }
-    }).catch((err) => {
-      reject(err);
-    });
-  });
-}
-
 function execLoginProcA() {
   const session = firebase.auth.Auth.Persistence.SESSION;
   return firebase.auth().setPersistence(session).then(() => {
@@ -46,13 +25,26 @@ function execLogout() {
   return firebase.auth().signOut();
 }
 
+// viewで使うべからず
 function execFetchDb() {
   const db = firebase.database();
   const msgRef = db.ref('/messages');
   return msgRef.once('value');
 }
 
-export { checkAuth, execLogin, 
-  execLoginProcA, execLoginProcB, execLogout,
-  execFetchDb
+function execPushDb(tgtData) {
+  const db = firebase.database();
+  const msgRef = db.ref('/messages');
+  const key = msgRef.push().key;
+  let updates = {};
+  updates['/' + key] = tgtData;
+  console.log(updates);
+  return msgRef.update(updates);
+}
+
+export {
+  checkAuth, 
+  execLoginProcA, execLoginProcB,
+  execLogout,
+  execFetchDb, execPushDb
 };

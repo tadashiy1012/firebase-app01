@@ -14,7 +14,7 @@
 <script>
 import firebase from 'firebase/app';
 import 'firebase/auth';
-import { execLoginProcA, execLoginProcB, execLogout } from './../funcs';
+import { execLoginProcA, execLoginProcB, execLogout } from './../fbFuncs';
 export default {
   computed: {
     loginState: function() {

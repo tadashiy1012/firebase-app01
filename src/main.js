@@ -27,4 +27,7 @@ import { Container } from './components';
   vapp.$store.dispatch('login/asyncSetLogin').then((resp) => {
     console.log(resp);
   });
+  vapp.$store.dispatch('db/fetchSnapshot').then((resp) => {
+    console.log(resp);
+  });
 }

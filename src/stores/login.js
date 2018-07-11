@@ -1,4 +1,4 @@
-import { checkAuth } from './../funcs';
+import { checkAuth } from './../fbFuncs';
 
 const login = {
   namespaced: true,
