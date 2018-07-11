@@ -1,8 +1,9 @@
+import { execFetchDb, checkAuth } from './../funcs';
+
 const db = {
   namespaced: true,
   state: {
-    hoge: 'hoge',
-    snapshot: null
+    snapshot: ['hoge']
   },
   mutations: {
     muSetSnapshot: function(state, payload) {
@@ -10,16 +11,17 @@ const db = {
     }
   },
   getters: {
-    getHoge: function(state) {
-      return state.hoge;
-    },
     getSnapshot: function(state) {
       return state.snapshot;
     }
   },
   actions: {
-    aysncSetSnapshot: async function({commit}) {
-      
+    setSnapshot: function({commit}, newSnapshot) {
+      return new Promise((resolve, reject) => {
+        const payload = { newSnapshot };
+        commit('muSetSnapshot', payload);
+        resolve(true);
+      });
     }
   }
 };
