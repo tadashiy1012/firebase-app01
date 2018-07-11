@@ -18,7 +18,7 @@ import { execLoginProcA, execLoginProcB, execLogout } from './../funcs';
 export default {
   computed: {
     loginState: function() {
-      return this.$store.getters.getLogin;
+      return this.$store.getters['login/getLogin'];
     }
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
         const result = await execLoginProcB();
         console.log(result);
       } else {
-        const result = await this.$store.dispatch('asyncSetLogin');
+        const result = await this.$store.dispatch('login/asyncSetLogin');
         console.log(result);
       }
     },
@@ -37,7 +37,7 @@ export default {
       const result = await execLogout();
       console.log(result);
       const payload = {newLoginState: false};
-      const resultB = await this.$store.dispatch('setLogin', payload);
+      const resultB = await this.$store.dispatch('login/setLogin', payload);
       console.log(resultB);
     }
   }

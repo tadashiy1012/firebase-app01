@@ -7,22 +7,24 @@ import 'firebaseui';
 import config from './config';
 import Vue from 'vue';
 import Vuex from 'vuex';
-import myStore from './store';
+import { login, db } from './stores';
 import { Container } from './components';
-import { checkAuth, execLogin } from './funcs'
 
 {
   console.log('ready!');
   firebase.initializeApp(config);
   firebase.app();
   Vue.use(Vuex);
+  const store = new Vuex.Store({
+    modules: { login, db }
+  });
   const vapp = new Vue({
     el: '#root',
-    store: new Vuex.Store(myStore),
+    store,
     components: { Container },
     template: '<Container />'
   });
-  vapp.$store.dispatch('asyncSetLogin').then((resp) => {
+  vapp.$store.dispatch('login/asyncSetLogin').then((resp) => {
     console.log(resp);
   });
 }

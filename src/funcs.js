@@ -46,4 +46,13 @@ function execLogout() {
   return firebase.auth().signOut();
 }
 
-export { checkAuth, execLogin, execLoginProcA, execLoginProcB, execLogout };
+function execFetchDb() {
+  const db = firebase.database();
+  const msgRef = db.ref('/messages');
+  return msgRef.once('value');
+}
+
+export { checkAuth, execLogin, 
+  execLoginProcA, execLoginProcB, execLogout,
+  execFetchDb
+};

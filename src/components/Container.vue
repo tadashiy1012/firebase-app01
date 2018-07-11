@@ -2,14 +2,17 @@
   <div>
     <h1>My Fb Hosted Page</h1>
     <Login />
+    <Database />
   </div>
 </template>
 
 <script>
 import Login from './Login.vue';
+import Database from './Database.vue';
 export default {
   components: {
-    Login
+    Login,
+    Database
   }
 }
 </script>

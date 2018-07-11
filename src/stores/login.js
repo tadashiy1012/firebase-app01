@@ -1,5 +1,7 @@
-import { checkAuth } from './funcs';
-const myStore = {
+import { checkAuth } from './../funcs';
+
+const login = {
+  namespaced: true,
   state: {
     login: false
   },
@@ -32,4 +34,4 @@ const myStore = {
   }
 };
 
-export default myStore;
+export default login;
