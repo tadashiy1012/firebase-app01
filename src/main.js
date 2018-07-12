@@ -8,7 +8,7 @@ import config from './config';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { login, db } from './stores';
-import { Container } from './components';
+import { Login, Database, DBInput, DBDelete } from './components';
 
 {
   console.log('ready!');
@@ -18,6 +18,18 @@ import { Container } from './components';
   const store = new Vuex.Store({
     modules: { login, db }
   });
+  const Container = {
+    components: {Login, Database, DBInput, DBDelete},
+    template: `
+      <div>
+        <h1>My Fb Hosted Page</h1>
+        <Login />
+        <Database />
+        <DBInput />
+        <DBDelete />
+      </div>
+    `
+  };
   const vapp = new Vue({
     el: '#root',
     store,
@@ -26,8 +38,8 @@ import { Container } from './components';
   });
   vapp.$store.dispatch('login/asyncSetLogin').then((resp) => {
     console.log(resp);
-  });
-  vapp.$store.dispatch('db/fetchSnapshot').then((resp) => {
+    return vapp.$store.dispatch('db/fetchSnapshot');
+  }).then((resp) => {
     console.log(resp);
   });
 }

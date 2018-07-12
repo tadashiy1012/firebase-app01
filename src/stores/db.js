@@ -1,4 +1,4 @@
-import { execFetchDb, execPushDb, checkAuth } from './../fbFuncs';
+import { execFetchDb, execPushDb, execDeleteDb, checkAuth } from './../fbFuncs';
 
 const initSS = {};
 
@@ -41,6 +41,14 @@ const db = {
     pushData: async function({}, tgtData) {
       const auth = await checkAuth();
       const result = auth ? await execPushDb(tgtData) : null;
+      return new Promise((resolve, reject) => {
+        console.log(result);
+        resolve(true);
+      });
+    },
+    deleteData: async function({}, tgtKey) {
+      const auth = await checkAuth();
+      const result = auth ? await execDeleteDb(tgtKey) : null;
       return new Promise((resolve, reject) => {
         console.log(result);
         resolve(true);

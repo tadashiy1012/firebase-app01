@@ -42,9 +42,15 @@ function execPushDb(tgtData) {
   return msgRef.update(updates);
 }
 
+function execDeleteDb(tgtKey) {
+  const db = firebase.database();
+  const msgRef = db.ref('/messages/' + tgtKey);
+  return msgRef.remove();
+}
+
 export {
   checkAuth, 
   execLoginProcA, execLoginProcB,
   execLogout,
-  execFetchDb, execPushDb
+  execFetchDb, execPushDb, execDeleteDb
 };

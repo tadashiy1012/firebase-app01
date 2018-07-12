@@ -1,4 +1,10 @@
-import Container from './Container.vue';
+import Login from './Login.vue';
+import Database from './Database.vue';
+import DBInput from './DBInput.vue';
+import DBDelete from './DBDelete.vue';
 export {
-  Container
+  Login,
+  Database,
+  DBInput,
+  DBDelete
 };
