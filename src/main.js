@@ -41,5 +41,11 @@ import { Login, Database, DBInput, DBDelete } from './components';
     return vapp.$store.dispatch('db/fetchSnapshot');
   }).then((resp) => {
     console.log(resp);
+    firebase.database().ref('/messages').on('value', function(ss) {
+      console.log('fire on.value!');
+      vapp.$store.dispatch('db/setSnapshot', ss.val()).then((resp) => {
+        console.log(resp);
+      });
+    });
   });
 }
